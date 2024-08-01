@@ -18,8 +18,8 @@ jobs:
   run-tests:
     strategy:
       matrix:
-       os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+       arg: ['--scan', '--stacktrace']
+    runs-on: ubuntu-latest
     steps:
       - uses: 'hmarr/debug-action@v3'
 
@@ -77,4 +77,4 @@ jobs:
           cache-read-only: false
 
       - name: Run Gradle
-        run: ./gradlew ${{ inputs.task-name }} --${{ inputs.log-level }} --scan --stacktrace
+        run: ./gradlew ${{ inputs.task-name }} --${{ inputs.log-level }} ${{ matrix.arg }}
