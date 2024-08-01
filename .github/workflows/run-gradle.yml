@@ -4,10 +4,12 @@ run-name: "Gradle Task ${{ inputs.task }}, ${{ inputs.runs-on }}, ${{ inputs.ref
 on:
   workflow_call:
     inputs:
-      input1:
-        required: false
+      task-name:
+        required: true
         type: string
-        default: "the-default-value"
+      log-level:
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -60,7 +62,6 @@ jobs:
           INPUTS_CONTEXT: ${{ toJson(inputs) }}
         run: echo "$INPUTS_CONTEXT"
 
-
       - name: Checkout the repo
         uses: actions/checkout@v4
 
@@ -74,4 +75,4 @@ jobs:
         uses: gradle/actions/setup-gradle@main
 
       - name: Run Gradle
-        run: ./gradlew build --scan --stacktrace
+        run: ./gradlew ${{ inputs.task-name }} --${{ inputs.log-level }} --scan --stacktrace
