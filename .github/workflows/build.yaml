@@ -11,20 +11,20 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-  build-first:
+  build-help:
     strategy:
       matrix:
-        log-level: [ 'info', 'debug' ]
+        log-level: [ 'info', 'quiet' ]
     uses: ./.github/workflows/run-gradle.yml
     with:
       task-name: help
       log-level: ${{ matrix.log-level }}
 
-  build-second:
-    needs: [ 'build-first' ]
+  build-assemble:
+    needs: [ 'build-help' ]
     strategy:
       matrix:
-        log-level: [ 'info', 'debug' ]
+        log-level: [ 'info', 'quiet' ]
     uses: ./.github/workflows/run-gradle.yml
     with:
       task-name: assemble
