@@ -75,6 +75,7 @@ jobs:
         uses: gradle/actions/setup-gradle@main
         with:
           cache-read-only: false
+          workflow-job-context: ${{ toJson(matrix) }} ${{ toJson(inputs) }}
 
       - name: Run Gradle
         run: ./gradlew ${{ inputs.task-name }} --${{ inputs.log-level }} ${{ matrix.arg }}
