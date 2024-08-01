@@ -6,10 +6,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-    group: 'the-concurrency-group'
-    cancel-in-progress: true
-
 jobs:
   build-help:
     strategy:
