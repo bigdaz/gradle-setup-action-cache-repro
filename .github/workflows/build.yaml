@@ -25,3 +25,20 @@ jobs:
     with:
       task-name: assemble
       log-level: ${{ matrix.log-level }}
+
+  job-without-name:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump script context
+      uses: actions/github-script@v7
+      with:
+        script: console.log(context)
+
+  job-with-name:
+    name: The Job Name
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump script context
+      uses: actions/github-script@v7
+      with:
+        script: console.log(context)
