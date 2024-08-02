@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   run-tests:
+    name: RUN TESTS
     strategy:
       matrix:
        arg: ['--scan', '--stacktrace']
